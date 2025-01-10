@@ -26,14 +26,15 @@ test('Create account',async({page})=>{
    //Click Service using index based XPath
    drop.nth(2)
     //Click Accounts using attribute based CSS selector
-    await page.locator(`text()='Accounts'`).click()
+    await page.locator(`//a[@class="slds-text-align_center appItem selected"]`).click()
     //Click New using getByRole
-    await page.getByRole('button',{name:"New"}).click()
+    await page.locator(`//a[@title="New"]`).click()
+    page.waitForTimeout(5000)
     //Enter Account name using attribute based CSS selector 
     let newname='Sundari'
-    await page.locator(`class="slds-input"`).fill(newname)
+    await page.locator(`input[name='Name']`).fill(newname)
     //Click Save button using XPath 
-    await page.locator('//button[@class="slds-button slds-button_brand slds-kx-is-animating-from-click"]').click()
+    await page.locator(`//button[@name='SaveEdit']`).click()
     //Verify the toast message displayed
     let toastMessage = await page.locator(`//span[contains(@class,"toastMessage")]`).textContent()
     console.log(toastMessage)
